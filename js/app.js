@@ -80,6 +80,7 @@ function handleClick(event) {
   voteCounter++;
   renderProducts();
   if (voteCounter === 10) {
+    productSelectorElem.innerHTML = '';
     renderResults();
     productSelectorElem.removeEventListener('click', handleClick);
   }
@@ -108,7 +109,7 @@ new Product('Baby Sweeper', './img/sweep.png');
 new Product('Tauntaun Sleeping Bag', './img/tauntaun.jpg');
 new Product('Unicorn Meat', './img/unicorn.jpg');
 new Product('Self Watering Can', './img/water-can.jpg');
-new Product('Uncomfrotabl Wine Glass', './img/wine-glass.jpg');
+new Product('Uncomfortable Wine Glass', './img/wine-glass.jpg');
 
 
 renderProducts();
