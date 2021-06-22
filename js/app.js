@@ -34,47 +34,47 @@ Product.prototype.renderSingleProduct = function(imgPosition, h3Position) {
 }
 
 // Global functions
-// function getRandomNumber() {
-//   return Math.floor(Math.random() * Product.allProducts.length);
-// }
+function getRandomNumber() {
+  return Math.floor(Math.random() * Product.allProducts.length);
+}
 
 function renderProducts() {
-  // let previousProducts = [leftProduct, centerProduct, rightProduct];
+  let previousProducts = [leftProduct, centerProduct, rightProduct];
 
-  // while (previousProducts.includes(leftProduct)) {
-  //   let randomIndex = getRandomNumber();
-  //   leftProduct = Product.allProducts[randomIndex];
-  // }
-  // previousProducts.push(leftProduct);
+  while (previousProducts.includes(leftProduct)) {
+    let randomIndex = getRandomNumber();
+    leftProduct = Product.allProducts[randomIndex];
+  }
+  previousProducts.push(leftProduct);
 
-  // while (previousProducts.includes(centerProduct)) {
-  //   let randomIndex = getRandomNumber();
-  //   centerProduct = Product.allProducts[randomIndex];
-  // }
-  // previousProducts.push(centerProduct);
+  while (previousProducts.includes(centerProduct)) {
+    let randomIndex = getRandomNumber();
+    centerProduct = Product.allProducts[randomIndex];
+  }
+  previousProducts.push(centerProduct);
 
-  // while (previousProducts.includes(rightProduct)) {
-  //   let randomIndex = getRandomNumber();
-  //   rightProduct = Product.allProducts[randomIndex];
-  // }
+  while (previousProducts.includes(rightProduct)) {
+    let randomIndex = getRandomNumber();
+    rightProduct = Product.allProducts[randomIndex];
+  }
 
 
 
 // ------------- Old code - Chooses three products that are not the same.
 // ------------- Does not check to see if a product a has been used the round before.
-  let leftProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-  leftProduct = Product.allProducts[leftProductIndex];
-  let centerProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-  centerProduct = Product.allProducts[centerProductIndex];
-  let rightProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-  rightProduct = Product.allProducts[rightProductIndex];
+  // let leftProductIndex = Math.floor(Math.random() * Product.allProducts.length);
+  // leftProduct = Product.allProducts[leftProductIndex];
+  // let centerProductIndex = Math.floor(Math.random() * Product.allProducts.length);
+  // centerProduct = Product.allProducts[centerProductIndex];
+  // let rightProductIndex = Math.floor(Math.random() * Product.allProducts.length);
+  // rightProduct = Product.allProducts[rightProductIndex];
 
-  while (centerProduct === leftProduct ||centerProduct === rightProduct || rightProduct === leftProduct) {
-    centerProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-    centerProduct = Product.allProducts[centerProductIndex];
-    rightProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-    rightProduct = Product.allProducts[rightProductIndex];
-  }
+  // while (centerProduct === leftProduct ||centerProduct === rightProduct || rightProduct === leftProduct) {
+  //   centerProductIndex = Math.floor(Math.random() * Product.allProducts.length);
+  //   centerProduct = Product.allProducts[centerProductIndex];
+  //   rightProductIndex = Math.floor(Math.random() * Product.allProducts.length);
+  //   rightProduct = Product.allProducts[rightProductIndex];
+  // }
 
   leftProduct.renderSingleProduct(leftImgElem, leftH3Elem);
   centerProduct.renderSingleProduct(centerImgElem, centerH3Elem);
@@ -117,85 +117,55 @@ function handleClick(event) {
   console.log(voteCounter);
 }
 
-// // Chart Stuff
-// function renderChart() {
-//   const productNameArray = [];
-//   const productVotesArray = [];
-//   const productTimesShownArray = [];
+// Chart Stuff
+function renderChart() {
+  const productNameArray = [];
+  const productVotesArray = [];
+  const productTimesShownArray = [];
 
-//   for (let product of Product.allProducts) {
-//     productNameArray.push(product.name);
-//     productVotesArray.push(product.votes);
-//     productTimesShownArray.push(product.timesShown);
-//   }
+  for (let product of Product.allProducts) {
+    productNameArray.push(product.name);
+    productVotesArray.push(product.votes);
+    productTimesShownArray.push(product.timesShown);
+  }
 
-//   const ctx = document.getElementById('productChart').getContext('2d');
+  const ctx = document.getElementById('productChart').getContext('2d');
 
-//     const productChart = new Chart(ctx, {
-//       type: 'bar',
-//       data: {
-//           labels: productNameArray,
-//           datasets: [{
-//               label: '# of Votes',
-//               data: productVotesArray,
-//               backgroundColor: [
-//                   'rgba(255, 99, 132, 0.2)',
-//                   'rgba(255, 99, 132, 0.2)',
-//                   'rgba(255, 99, 132, 0.2)',
-//                   'rgba(255, 99, 132, 0.2)',
-//                   'rgba(255, 99, 132, 0.2)',
-//                   'rgba(255, 99, 132, 0.2)',
-//                   'rgba(255, 99, 132, 0.2)',
-//                   'rgba(255, 99, 132, 0.2)',
-                  
-//               ],
-//               borderColor: [
-//                   'rgba(255, 99, 132, 1)',
-//                   'rgba(54, 162, 235, 1)',
-//                   'rgba(255, 99, 132, 1)',
-//                   'rgba(54, 162, 235, 1)',
-//                   'rgba(255, 99, 132, 1)',
-//                   'rgba(54, 162, 235, 1)',
-//                   'rgba(255, 99, 132, 1)',
-//                   'rgba(54, 162, 235, 1)'
-//               ],
-//               borderWidth: 1
-//           }, {
-//             label: '# of Times Shown',
-//             data: productTimesShownArray,
-//             backgroundColor: [
-//               'rgba(54, 162, 235, 0.2)',
-//               'rgba(54, 162, 235, 0.2)',
-//               'rgba(54, 162, 235, 0.2)',
-//               'rgba(54, 162, 235, 0.2)',
-//               'rgba(54, 162, 235, 0.2)',
-//               'rgba(54, 162, 235, 0.2)',
-//               'rgba(54, 162, 235, 0.2)',
-//               'rgba(54, 162, 235, 0.2)'
-                
-//             ],
-//             borderColor: [
-//                 'rgba(255, 99, 132, 1)',
-//                 'rgba(54, 162, 235, 1)',
-//                 'rgba(255, 99, 132, 1)',
-//                 'rgba(54, 162, 235, 1)',
-//                 'rgba(255, 99, 132, 1)',
-//                 'rgba(54, 162, 235, 1)',
-//                 'rgba(255, 99, 132, 1)',
-//                 'rgba(54, 162, 235, 1)'
-//             ],
-//             borderWidth: 1
-//         }]
-//       },
-//       options: {
-//           scales: {
-//               y: {
-//                   beginAtZero: true
-//               }
-//           }
-//       }
-//     });
-// }
+    const barChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: productNameArray,
+          datasets: [{
+              label: '# of Votes',
+              data: productVotesArray,
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+              ],
+              borderColor: [
+                  'red'
+              ],
+              borderWidth: 1
+          }, {
+            label: '# of Times Shown',
+            data: productTimesShownArray,
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.2)', 
+            ],
+            borderColor: [
+                'blue',
+            ],
+            borderWidth: 1
+        }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+    });
+}
 
 // Event Listener
 productSelectorElem.addEventListener('click', handleClick);
