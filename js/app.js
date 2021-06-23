@@ -15,6 +15,8 @@ let leftProduct = null;
 let centerProduct = null;
 let rightProduct = null;
 const maxVote = 10;
+let totalVotes = [];
+let totalTimesShown = [];
 
 // Constructor Function
 function Product(name, image) {
@@ -58,24 +60,6 @@ function renderProducts() {
     rightProduct = Product.allProducts[randomIndex];
   }
 
-
-
-// ------------- Old code - Chooses three products that are not the same.
-// ------------- Does not check to see if a product a has been used the round before.
-  // let leftProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-  // leftProduct = Product.allProducts[leftProductIndex];
-  // let centerProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-  // centerProduct = Product.allProducts[centerProductIndex];
-  // let rightProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-  // rightProduct = Product.allProducts[rightProductIndex];
-
-  // while (centerProduct === leftProduct ||centerProduct === rightProduct || rightProduct === leftProduct) {
-  //   centerProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-  //   centerProduct = Product.allProducts[centerProductIndex];
-  //   rightProductIndex = Math.floor(Math.random() * Product.allProducts.length);
-  //   rightProduct = Product.allProducts[rightProductIndex];
-  // }
-
   leftProduct.renderSingleProduct(leftImgElem, leftH3Elem);
   centerProduct.renderSingleProduct(centerImgElem, centerH3Elem);
   rightProduct.renderSingleProduct(rightImgElem, rightH3Elem);
@@ -98,16 +82,18 @@ function handleClick(event) {
   if (id === 'leftProductImg') {
     leftProduct.votes++;  
     voteCounter++;
+    renderProducts();
   } else if (id === 'centerProductImg') {
     centerProduct.votes++;
     voteCounter++;
+    renderProducts();
   } else if (id === 'rightProductImg') {
     rightProduct.votes++;
     voteCounter++;
+    renderProducts();
   } else {
     alert('Please click on a picture');
   }
-  renderProducts();
   if (voteCounter === maxVote) {
     productSelectorElem.innerHTML = '';
     renderResults();
@@ -115,6 +101,29 @@ function handleClick(event) {
     productSelectorElem.removeEventListener('click', handleClick);
   }
   console.log(voteCounter);
+  storeVotes();
+}
+
+// Local Storage
+function storeVotes() {
+  let stringProducts = JSON.stringify(Product.allProducts);
+  localStorage.setItem('storedProducts', stringProducts);
+}
+
+function getVotes() {
+  let retrievedProducts = localStorage.getItem('storedProducts');
+  if (retrievedProducts) {
+    let parsedProducts = JSON.parse(retrievedProducts);
+    console.log(parsedProducts);
+    for (let i = 0; i < parsedProducts.length; i++) {
+      let products = parsedProducts[i];
+      totalVotes.push(products.votes);
+      totalTimesShown.push(products.timesShown);
+      Product.allProducts[i].votes += totalVotes[i];
+      Product.allProducts[i].timesShown += totalTimesShown[i];
+      console.log(Product.allProducts);
+    }
+  }
 }
 
 // Chart Stuff
@@ -193,3 +202,4 @@ new Product('Uncomfortable Wine Glass', './img/wine-glass.jpg');
 
 
 renderProducts();
+getVotes();
