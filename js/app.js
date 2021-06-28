@@ -14,7 +14,7 @@ Product.allProducts = [];
 let leftProduct = null;
 let centerProduct = null;
 let rightProduct = null;
-const maxVote = 10;
+const maxVote = 25;
 let totalVotes = [];
 let totalTimesShown = [];
 
@@ -72,7 +72,7 @@ function renderResults() {
   productUlElem.appendChild(ulTitleElem);
   for (let product of Product.allProducts) {
     let liElem = document.createElement('li');
-    liElem.textContent = `${product.name}: ${product.votes} Times shown: ${product.timesShown}`;
+    liElem.textContent = `${product.name}: Votes: ${product.votes}, Times shown: ${product.timesShown}`;
     productUlElem.appendChild(liElem);
   }
 }
